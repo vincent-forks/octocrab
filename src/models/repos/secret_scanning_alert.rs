@@ -6,7 +6,7 @@ pub struct SecretScanningAlert {
     pub created_at: DateTime<Utc>,
     pub updated_at: Option<DateTime<Utc>>,
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub locations_url: Url,
     pub state: State,
     pub resolution: Option<Resolution>,

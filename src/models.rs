@@ -171,7 +171,7 @@ pub struct Contents {
     pub sha: String,
     pub url: Url,
     pub git_url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub download_url: Url,
 }
 
@@ -351,10 +351,10 @@ pub struct ProjectCard {
 pub struct Project {
     pub owner_url: Url,
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub columns_url: Url,
     pub id: ProjectId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub name: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub body: Option<String>,
@@ -381,7 +381,7 @@ pub struct ProjectColumn {
     pub project_url: Url,
     pub cards_url: Url,
     pub id: ProjectColumnId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub name: String,
     pub created_at: DateTime<Utc>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -406,22 +406,36 @@ pub struct IssuePullRequest {
 pub struct Author {
     pub login: String,
     pub id: UserId,
-    pub node_id: String,
+    pub node_id: Option<String>,
+    #[serde(skip_serializing)]
     pub avatar_url: Url,
+    #[serde(skip_serializing)]
     pub gravatar_id: String,
+    #[serde(skip_serializing)]
     pub url: Url,
-    pub html_url: Url,
+    #[serde(skip_serializing)]
+    pub html_url: Option<Url>,
+    #[serde(skip_serializing)]
     pub followers_url: Url,
+    #[serde(skip_serializing)]
     pub following_url: Url,
+    #[serde(skip_serializing)]
     pub gists_url: Url,
+    #[serde(skip_serializing)]
     pub starred_url: Url,
+    #[serde(skip_serializing)]
     pub subscriptions_url: Url,
+    #[serde(skip_serializing)]
     pub organizations_url: Url,
+    #[serde(skip_serializing)]
     pub repos_url: Url,
+    #[serde(skip_serializing)]
     pub events_url: Url,
+    #[serde(skip_serializing)]
     pub received_events_url: Url,
     pub r#type: String,
     pub site_admin: bool,
+    #[serde(skip_serializing)]
     pub patch_url: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
@@ -448,11 +462,11 @@ where
 pub struct UserProfile {
     pub login: String,
     pub id: UserId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub avatar_url: Url,
     pub gravatar_id: String,
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub followers_url: Url,
     pub following_url: Url,
     pub gists_url: Url,
@@ -492,11 +506,11 @@ pub struct SimpleUser {
     pub email: Option<String>,
     pub login: String,
     pub id: UserId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub avatar_url: Url,
     pub gravatar_id: String,
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub followers_url: Url,
     pub following_url: Url,
     pub gists_url: Url,
@@ -517,11 +531,11 @@ pub struct SimpleUser {
 pub struct Follower {
     pub login: String,
     pub id: UserId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub avatar_url: Url,
     pub gravatar_id: String,
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub followers_url: Url,
     pub following_url: Url,
     pub gists_url: Url,
@@ -542,11 +556,11 @@ pub struct Follower {
 pub struct Followee {
     pub login: String,
     pub id: UserId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub avatar_url: Url,
     pub gravatar_id: String,
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub followers_url: Url,
     pub following_url: Url,
     pub gists_url: Url,
@@ -603,25 +617,26 @@ pub struct StarGazer {
 #[derive(Debug, Clone, Hash, Eq, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct Label {
-    pub id: LabelId,
-    pub node_id: String,
+    pub id: Option<LabelId>,
+    pub node_id: Option<String>,
+    #[serde(skip_serializing)]
     pub url: Url,
     pub name: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
     pub color: String,
-    pub default: bool,
+    pub default: Option<bool>,
 }
 
 #[derive(Debug, Clone, Hash, Eq, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct Milestone {
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub labels_url: Option<Url>,
     pub id: MilestoneId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub number: i64,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub state: Option<String>,
@@ -656,94 +671,95 @@ pub struct Repository {
     pub owner: Option<Author>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub private: Option<bool>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub html_url: Option<Url>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub fork: Option<bool>,
+    #[serde(skip_serializing)]
     pub url: Url,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub archive_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub assignees_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub blobs_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub branches_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub collaborators_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub comments_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub commits_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub compare_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub contents_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub contributors_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub deployments_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub downloads_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub events_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub forks_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub git_commits_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub git_refs_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub git_tags_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub git_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub issue_comment_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub issue_events_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub issues_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub keys_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub labels_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub languages_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub merges_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub milestones_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub notifications_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub pulls_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub releases_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub ssh_url: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub stargazers_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub statuses_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub subscribers_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub subscription_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub tags_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub teams_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub trees_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub clone_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub mirror_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub hooks_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub svn_url: Option<Url>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub homepage: Option<String>,
@@ -852,9 +868,9 @@ pub struct RepositoryMetrics {
 pub struct License {
     pub key: String,
     pub name: String,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub spdx_id: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub url: Option<Url>,
     pub html_url: Option<Url>,
     pub description: Option<String>,
@@ -874,7 +890,7 @@ pub struct Code {
     pub sha: String,
     pub url: Url,
     pub git_url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub repository: Repository,
 }
 

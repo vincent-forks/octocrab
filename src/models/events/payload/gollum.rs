@@ -22,7 +22,8 @@ pub struct GollumEventPage {
     /// The latest commit SHA of the page.
     pub sha: String,
     /// Url to the page.
-    pub html_url: Url,
+    #[serde(skip_serializing)]
+    pub html_url: Option<Url>,
 }
 
 /// The action performed on a given page.

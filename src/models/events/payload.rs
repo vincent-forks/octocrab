@@ -58,14 +58,18 @@ pub enum EventInstallation {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct EventInstallationId {
     pub id: InstallationId,
-    pub node_id: String,
+    pub node_id: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct WrappedEventPayload {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub installation: Option<EventInstallation>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub organization: Option<Organization>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub repository: Option<Repository>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub sender: Option<Author>,
     #[serde(flatten)]
     pub specific: Option<EventPayload>,
@@ -110,6 +114,7 @@ pub struct Commit {
     pub author: CommitAuthor,
     pub message: String,
     pub distinct: bool,
+    #[serde(skip_serializing)]
     pub url: Url,
 }
 
@@ -118,7 +123,7 @@ pub struct Commit {
 #[non_exhaustive]
 pub struct InstallationEventRepository {
     pub id: RepositoryId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub name: String,
     pub full_name: String,
     pub private: bool,

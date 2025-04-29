@@ -9,7 +9,7 @@ pub struct CodeScanningAlert {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub state: CodeScanningState,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub fixed_at: Option<chrono::DateTime<chrono::Utc>>,

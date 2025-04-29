@@ -17,7 +17,7 @@ pub mod secrets;
 pub struct Ref {
     #[serde(rename = "ref")]
     pub ref_field: String,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub url: Url,
     pub object: Object,
 }
@@ -34,10 +34,13 @@ pub enum Object {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct RepoCommit {
+    #[serde(skip_serializing)]
     pub url: String,
     pub sha: String,
-    pub node_id: String,
+    pub node_id: Option<String>,
+    #[serde(skip_serializing)]
     pub html_url: String,
+    #[serde(skip_serializing)]
     pub comments_url: String,
     pub commit: RepoCommitPage,
     #[serde(deserialize_with = "maybe_empty::deserialize")]
@@ -287,7 +290,7 @@ pub struct Tag {
     pub commit: CommitObject,
     pub zipball_url: Url,
     pub tarball_url: Url,
-    pub node_id: String,
+    pub node_id: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -301,17 +304,24 @@ pub struct CommitObject {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub struct Release {
+    #[serde(skip_serializing)]
     pub url: Url,
-    pub html_url: Url,
+    #[serde(skip_serializing)]
+    pub html_url: Option<Url>,
+    #[serde(skip_serializing)]
     pub assets_url: Url,
+    #[serde(skip_serializing)]
     pub upload_url: String,
+    #[serde(skip_serializing)]
     pub tarball_url: Option<Url>,
+    #[serde(skip_serializing)]
     pub zipball_url: Option<Url>,
     pub id: ReleaseId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub tag_name: String,
     pub target_commitish: String,
     pub name: Option<String>,
+    #[serde(skip_serializing)]
     pub body: Option<String>,
     pub draft: bool,
     pub prerelease: bool,
@@ -334,7 +344,7 @@ pub struct Asset {
     pub url: Url,
     pub browser_download_url: Url,
     pub id: AssetId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub name: String,
     pub label: Option<String>,
     pub state: String,
@@ -354,11 +364,11 @@ pub struct Uploader {
     pub email: Option<String>,
     pub login: String,
     pub id: UploaderId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub avatar_url: Url,
     pub gravatar_id: Option<String>,
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub followers_url: Url,
     pub following_url: Url,
     pub gists_url: Url,
@@ -377,7 +387,7 @@ pub struct Uploader {
 #[non_exhaustive]
 /// Metadata for a Git tag
 pub struct GitTag {
-    pub node_id: String,
+    pub node_id: Option<String>,
     /// Name of the tag. Example: v0.0.1
     pub tag: String,
     pub sha: String,
@@ -390,7 +400,7 @@ pub struct GitTag {
 pub struct MergeCommit {
     pub url: Url,
     pub sha: String,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub html_url: String,
     pub comments_url: String,
 }

@@ -6,9 +6,9 @@ use chrono;
 #[non_exhaustive]
 pub struct Team {
     pub id: TeamId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub name: String,
     pub slug: String,
     pub description: Option<String>,
@@ -73,7 +73,7 @@ pub struct TeamInvitation {
     pub failed_reason: Option<String>,
     pub inviter: Author,
     pub team_count: u32,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub invitation_teams_url: String,
 }
 

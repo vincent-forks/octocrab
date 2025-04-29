@@ -4,27 +4,28 @@ use crate::models::commits::CommentReactions;
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct PullRequest {
+    #[serde(skip_serializing)]
     pub url: String,
     pub id: PullRequestId,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub node_id: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub html_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub diff_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub patch_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub issue_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub commits_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub review_comments_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub review_comment_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub comments_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub statuses_url: Option<Url>,
     /// The pull request number.  Note that GitHub's REST API
     /// considers every pull-request an issue with the same number.
@@ -39,11 +40,11 @@ pub struct PullRequest {
     pub title: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub user: Option<Box<Author>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub body: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub body_text: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub body_html: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub labels: Option<Vec<Label>>,
@@ -81,8 +82,7 @@ pub struct PullRequest {
     pub rebaseable: Option<bool>,
     pub head: Box<Head>,
     pub base: Box<Base>,
-    #[serde(rename = "_links")]
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(rename = "_links", skip_serializing)]
     pub links: Option<Box<Links>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub author_association: Option<AuthorAssociation>,
@@ -214,25 +214,25 @@ pub struct PullRequestLink {
 #[non_exhaustive]
 pub struct Review {
     pub id: ReviewId,
-    pub node_id: String,
-    pub html_url: Url,
+    pub node_id: Option<String>,
+    #[serde(skip_serializing)]
+    pub html_url: Option<Url>,
     pub user: Option<Author>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub body: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub body_text: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub body_html: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub commit_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub state: Option<ReviewState>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub pull_request_url: Option<Url>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub submitted_at: Option<chrono::DateTime<chrono::Utc>>,
-    #[serde(rename = "_links")]
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(rename = "_links", skip_serializing)]
     pub links: Option<Links>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub author_association: Option<AuthorAssociation>,
@@ -265,7 +265,7 @@ pub struct Comment {
     pub url: Url,
     pub pull_request_review_id: Option<ReviewId>,
     pub id: CommentId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub diff_hunk: String,
     pub path: String,
     pub position: Option<u64>,
@@ -278,9 +278,10 @@ pub struct Comment {
     pub body: String,
     pub created_at: chrono::DateTime<chrono::Utc>,
     pub updated_at: chrono::DateTime<chrono::Utc>,
+    #[serde(skip_serializing)]
     pub html_url: String,
-    pub author_association: AuthorAssociation,
-    #[serde(rename = "_links")]
+    pub author_association: Option<AuthorAssociation>,
+    #[serde(rename = "_links", skip_serializing)]
     pub links: Links,
     pub start_line: Option<u64>,
     pub original_start_line: Option<u64>,
@@ -297,7 +298,7 @@ pub struct ReviewComment {
     pub url: Url,
     pub pull_request_review_id: Option<ReviewId>,
     pub id: CommentId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub diff_hunk: String,
     pub path: String,
     pub position: Option<u64>,
@@ -310,14 +311,16 @@ pub struct ReviewComment {
     pub body: String,
     pub created_at: chrono::DateTime<chrono::Utc>,
     pub updated_at: chrono::DateTime<chrono::Utc>,
+    #[serde(skip_serializing)]
     pub html_url: String,
+    #[serde(skip_serializing)]
     pub pull_request_url: String,
-    pub author_association: AuthorAssociation,
-    #[serde(rename = "_links")]
+    pub author_association: Option<AuthorAssociation>,
+    #[serde(rename = "_links", skip_serializing)]
     pub links: Links,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub body_text: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub body_html: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub reactions: Option<CommentReactions>,
@@ -342,7 +345,7 @@ pub enum Side {
 #[non_exhaustive]
 pub struct Thread {
     pub comments: Vec<Comment>,
-    pub node_id: String,
+    pub node_id: Option<String>,
 }
 
 // This is rather annoying, but Github uses both SCREAMING_SNAKE_CASE and snake_case

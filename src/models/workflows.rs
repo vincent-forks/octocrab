@@ -5,14 +5,14 @@ use chrono::{DateTime, Utc};
 #[non_exhaustive]
 pub struct WorkFlow {
     pub id: WorkflowId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub name: String,
     pub path: String,
     pub state: String,
     pub created_at: chrono::DateTime<chrono::Utc>,
     pub updated_at: chrono::DateTime<chrono::Utc>,
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub badge_url: Url,
 }
 
@@ -21,7 +21,7 @@ pub struct WorkFlow {
 pub struct Run {
     pub id: RunId,
     pub workflow_id: WorkflowId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub name: String,
     pub head_branch: String,
     pub head_sha: String,
@@ -33,7 +33,7 @@ pub struct Run {
     pub created_at: chrono::DateTime<chrono::Utc>,
     pub updated_at: chrono::DateTime<chrono::Utc>,
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub jobs_url: Url,
     pub logs_url: Url,
     pub check_suite_url: Url,
@@ -73,10 +73,10 @@ pub struct Job {
     pub run_url: Url,
     pub run_attempt: u32,
 
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub head_sha: String,
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub status: Status,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub conclusion: Option<Conclusion>,
@@ -140,7 +140,7 @@ pub struct Step {
 #[non_exhaustive]
 pub struct WorkflowListArtifact {
     pub id: crate::models::ArtifactId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub name: String,
     pub size_in_bytes: usize,
     pub url: Url,

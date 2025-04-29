@@ -13,9 +13,9 @@ pub struct Gist {
     pub forks_url: Url,
     pub git_pull_url: Url,
     pub git_push_url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub id: String,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub public: bool,
     pub updated_at: DateTime<Utc>,
     pub url: Url,
@@ -55,7 +55,7 @@ pub struct GistChangeStatus {
 #[derive(Debug, Deserialize)]
 pub struct GistRevision {
     pub id: String,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub public: bool,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,

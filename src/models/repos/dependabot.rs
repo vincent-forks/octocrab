@@ -8,7 +8,7 @@ pub struct DependabotAlert {
     pub security_advisory: SecurityAdvisory,
     pub security_vulnerability: SecurityVulnerability,
     pub url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
     pub dismissed_at: Option<DateTime<Utc>>,

@@ -17,7 +17,7 @@ pub struct CheckRunOutput {
 #[non_exhaustive]
 pub struct CheckRun {
     pub id: CheckRunId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub details_url: Option<String>,
     pub head_sha: String,
     pub url: String,
@@ -41,7 +41,7 @@ pub struct ListCheckRuns {
 #[non_exhaustive]
 pub struct CheckSuite {
     pub id: CheckSuiteId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub head_branch: String,
     pub head_sha: String,
     pub status: Option<String>,

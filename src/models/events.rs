@@ -51,6 +51,15 @@ macro_rules! event_type {
             }
         }
 
+        impl std::fmt::Display for EventType {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                match self {
+                    $(EventType::$name => write!(f, stringify!($name))),+,
+                    EventType::UnknownEvent(s) => write!(f, "{}", s),
+                }
+            }
+        }
+
         fn deserialize_event_type(event_type: &str) -> EventType {
             match event_type {
                 $(stringify!($name) => EventType::$name),+,
@@ -98,6 +107,7 @@ event_type! {
 pub struct Repository {
     pub id: RepositoryId,
     pub name: String,
+    #[serde(skip_serializing)]
     pub url: Url,
 }
 
@@ -107,8 +117,11 @@ pub struct Repository {
 pub struct Org {
     pub id: OrgId,
     pub login: String,
+    #[serde(skip_serializing)]
     pub gravatar_id: String,
+    #[serde(skip_serializing)]
     pub url: Url,
+    #[serde(skip_serializing)]
     pub avatar_url: Url,
 }
 
@@ -118,9 +131,13 @@ pub struct Org {
 pub struct Actor {
     pub id: ActorId,
     pub login: String,
-    pub display_login: String,
+    #[serde(skip_serializing)]
+    pub display_login: Option<String>,
+    #[serde(skip_serializing)]
     pub gravatar_id: String,
+    #[serde(skip_serializing)]
     pub url: Url,
+    #[serde(skip_serializing)]
     pub avatar_url: Url,
 }
 

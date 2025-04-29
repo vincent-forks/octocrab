@@ -7,13 +7,13 @@ pub struct App {
     pub id: AppId,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub slug: Option<String>,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub owner: Author,
     pub name: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
     pub external_url: Url,
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub created_at: Option<DateTime<Utc>>,
     #[serde(skip_serializing_if = "Option::is_none")]

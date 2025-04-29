@@ -974,7 +974,7 @@ impl EventInstallation {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct EventInstallationId {
     pub id: InstallationId,
-    pub node_id: String,
+    pub node_id: Option<String>,
 }
 
 /// A repository in installation related webhook events.
@@ -982,7 +982,7 @@ pub struct EventInstallationId {
 #[non_exhaustive]
 pub struct InstallationEventRepository {
     pub id: RepositoryId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub name: String,
     pub full_name: String,
     pub private: bool,

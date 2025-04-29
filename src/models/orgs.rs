@@ -6,7 +6,7 @@ pub mod secrets;
 pub struct Organization {
     pub login: String,
     pub id: OrgId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub url: Url,
     pub repos_url: Url,
     pub events_url: Url,

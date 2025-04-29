@@ -6,10 +6,10 @@ use super::{reactions::ReactionContent, *};
 #[non_exhaustive]
 pub struct Comment {
     // TODO check actuality comparing with github json schema and pulls::ReviewComment
-    pub html_url: Url,
+    pub html_url: Option<Url>,
     pub url: Url,
     pub id: CommentId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub body: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -23,7 +23,7 @@ pub struct Comment {
     pub created_at: chrono::DateTime<chrono::Utc>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
-    pub author_association: AuthorAssociation,
+    pub author_association: Option<AuthorAssociation>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub reactions: Option<CommentReactions>,
 }
@@ -121,8 +121,9 @@ pub struct Commit {
     pub commit: CommitElement,
     pub committer: Option<Author>,
     pub files: Option<Vec<repos::DiffEntry>>,
+    #[serde(skip_serializing)]
     pub html_url: String,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub parents: Vec<CommitParent>,
     pub sha: String,
     pub stats: Option<CommitStats>,
@@ -141,7 +142,8 @@ pub enum GithubCommitStatus {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GitCommitObject {
     pub sha: String,
-    pub node_id: String,
+    pub node_id: Option<String>,
+    #[serde(skip_serializing)]
     pub url: String,
     pub author: models::repos::CommitAuthor,
     pub committer: repos::CommitAuthor,
@@ -149,5 +151,6 @@ pub struct GitCommitObject {
     pub tree: models::repos::CommitObject,
     pub parents: Vec<models::repos::Commit>,
     pub verification: models::repos::Verification,
+    #[serde(skip_serializing)]
     pub html_url: String,
 }

@@ -24,7 +24,7 @@ pub enum ReactionContent {
 #[non_exhaustive]
 pub struct Reaction {
     pub id: ReactionId,
-    pub node_id: String,
+    pub node_id: Option<String>,
     pub user: Author,
     pub content: ReactionContent,
     pub created_at: chrono::DateTime<chrono::Utc>,
