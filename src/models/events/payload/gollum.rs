@@ -1,5 +1,4 @@
 use serde::{Deserialize, Serialize};
-use url::Url;
 
 /// The payload in a [`super::EventPayload::GollumEvent`] type.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -23,7 +22,7 @@ pub struct GollumEventPage {
     pub sha: String,
     /// Url to the page.
     #[serde(skip_serializing)]
-    pub html_url: Option<Url>,
+    pub html_url: Option<String>,
 }
 
 /// The action performed on a given page.

@@ -42,6 +42,8 @@ pub enum IssueCommentEventAction {
     Deleted,
     /// Only available on webhooks.
     Edited,
+    #[serde(other)]
+    Unknown
 }
 
 #[cfg(test)]

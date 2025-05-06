@@ -71,6 +71,10 @@ macro_rules! event_type {
             event_type: &EventType,
             data: serde_json::Value,
         ) -> Result<Option<EventPayload>, serde_json::Error> {
+            if data.is_object() && data.as_object().map_or(false, |obj| obj.is_empty()) {
+                return Ok(Some(EventPayload::UnknownEvent(Box::new(data))));
+            }
+
             let maybe_payload = match event_type {
                 $(EventType::$name=> {
                     serde_json::from_value::<Box<$payload>>(data).map(EventPayload::$name)?

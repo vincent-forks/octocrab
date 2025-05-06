@@ -678,7 +678,7 @@ pub struct Repository {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub fork: Option<bool>,
     #[serde(skip_serializing)]
-    pub url: Url,
+    pub url: Option<Url>,
     #[serde(skip_serializing)]
     pub archive_url: Option<Url>,
     #[serde(skip_serializing)]

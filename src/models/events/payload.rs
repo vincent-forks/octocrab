@@ -112,7 +112,7 @@ pub enum EventPayload {
 pub struct Commit {
     pub sha: String,
     pub author: CommitAuthor,
-    pub message: String,
+    pub message: Option<String>,
     pub distinct: bool,
     #[serde(skip_serializing)]
     pub url: Url,
