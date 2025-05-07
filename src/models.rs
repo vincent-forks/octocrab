@@ -871,7 +871,7 @@ pub struct License {
     pub key: String,
     pub name: String,
     pub node_id: Option<String>,
-    pub spdx_id: String,
+    pub spdx_id: Option<String>,
     #[serde(skip_serializing)]
     pub url: Option<Url>,
     pub html_url: Option<Url>,
