@@ -766,7 +766,9 @@ pub struct Repository {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language: Option<::serde_json::Value>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub forks_count: Option<u32>,
+    pub forks_count: Option<i32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub forks: Option<i32>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub stargazers_count: Option<u32>,
     #[serde(skip_serializing_if = "Option::is_none")]
