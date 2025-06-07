@@ -13,6 +13,7 @@ pub struct PushEventPayload {
     pub r#ref: String,
     pub head: String,
     pub before: String,
+    #[serde(skip_serializing)]
     pub commits: Vec<Commit>,
 }
 

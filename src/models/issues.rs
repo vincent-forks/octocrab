@@ -34,7 +34,7 @@ pub struct Issue {
     pub assignee: Option<Author>,
     pub assignees: Option<Vec<Author>>,
     pub author_association: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub milestone: Option<Milestone>,
     pub locked: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
