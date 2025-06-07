@@ -46,7 +46,7 @@ pub struct PullRequest {
     pub body_text: Option<String>,
     #[serde(skip_serializing)]
     pub body_html: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+   #[serde(skip_serializing)]
     pub labels: Option<Vec<Label>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub milestone: Option<Box<Milestone>>,
@@ -76,7 +76,7 @@ pub struct PullRequest {
     pub assignees: Option<Vec<Author>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub requested_reviewers: Option<Vec<Author>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub requested_teams: Option<Vec<teams::RequestedTeam>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub rebaseable: Option<bool>,

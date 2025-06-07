@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 #[non_exhaustive]
 pub struct GollumEventPayload {
     /// The pages that were updated.
+    #[serde(skip_serializing)]
     pub pages: Vec<GollumEventPage>,
 }
 
