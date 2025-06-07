@@ -74,7 +74,7 @@ pub struct PullRequest {
     pub assignee: Option<Box<Author>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub assignees: Option<Vec<Author>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub requested_reviewers: Option<Vec<Author>>,
     #[serde(skip_serializing)]
     pub requested_teams: Option<Vec<teams::RequestedTeam>>,

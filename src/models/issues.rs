@@ -28,6 +28,7 @@ pub struct Issue {
     #[serde(skip_serializing)]
     pub body_html: Option<String>,
     pub user: Author,
+    #[serde(skip_serializing)]
     pub labels: Vec<Label>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub assignee: Option<Author>,
