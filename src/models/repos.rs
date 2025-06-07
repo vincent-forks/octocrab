@@ -328,6 +328,7 @@ pub struct Release {
     pub created_at: Option<DateTime<Utc>>,
     pub published_at: Option<DateTime<Utc>>,
     pub author: Option<crate::models::Author>,
+    #[serde(skip_serializing)]
     pub assets: Vec<Asset>,
 }
 

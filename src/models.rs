@@ -673,7 +673,7 @@ pub struct Repository {
     pub private: Option<bool>,
     #[serde(skip_serializing)]
     pub html_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub description: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub fork: Option<bool>,
@@ -835,7 +835,7 @@ pub struct Repository {
     pub subscribers_count: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub network_count: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+     #[serde(skip_serializing)]
     pub license: Option<License>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub allow_auto_merge: Option<bool>,

@@ -8,6 +8,7 @@ pub struct CreateEventPayload {
     pub r#ref: Option<String>,
     pub ref_type: String,
     pub master_branch: String,
+    #[serde(skip_serializing)]
     pub description: Option<String>,
     pub pusher_type: String,
 }
