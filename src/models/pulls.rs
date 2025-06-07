@@ -46,9 +46,9 @@ pub struct PullRequest {
     pub body_text: Option<String>,
     #[serde(skip_serializing)]
     pub body_html: Option<String>,
-   #[serde(skip_serializing)]
+    #[serde(skip_serializing)]
     pub labels: Option<Vec<Label>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub milestone: Option<Box<Milestone>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub active_lock_reason: Option<String>,

@@ -11,6 +11,7 @@ pub struct IssuesWebhookEventPayload {
     pub assignee: Option<Author>,
     pub enterprise: Option<serde_json::Value>,
     pub issue: Issue,
+    #[serde(skip_serializing)]
     pub milestone: Option<Milestone>,
     pub label: Option<Label>,
     pub changes: Option<IssuesWebhookEventChanges>,

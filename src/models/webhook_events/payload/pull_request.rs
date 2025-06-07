@@ -11,6 +11,7 @@ pub struct PullRequestWebhookEventPayload {
     pub number: u64,
     pub pull_request: PullRequest,
     pub reason: Option<String>,
+    #[serde(skip_serializing)]
     pub milestone: Option<Milestone>,
     pub label: Option<Label>,
     pub after: Option<String>,
