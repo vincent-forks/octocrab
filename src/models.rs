@@ -85,10 +85,22 @@ macro_rules! id_type {
                     }
                     fn visit_str<E>(self, id: &str) -> Result<Self::Value, E>
                         where E: de::Error {
-                        id.parse::<u64>().map($name).map_err(de::Error::custom)
+                        if id == "null" || id.is_empty() {
+                            Ok($name(0))
+                        } else {
+                            id.parse::<u64>().map($name).map_err(de::Error::custom)
+                        }
+                    }
+                    fn visit_none<E>(self) -> Result<Self::Value, E>
+                        where E: de::Error {
+                        Ok($name(0))
+                    }
+                    fn visit_unit<E>(self) -> Result<Self::Value, E>
+                        where E: de::Error {
+                        Ok($name(0))
                     }
                     fn expecting(&self, f: &mut fmt::Formatter) -> fmt::Result {
-                        write!(f, "expected {} as number or string", stringify!($name)) // TODO: $name
+                        write!(f, "expected {} as number, string, or null", stringify!($name))
                     }
                 }
 
@@ -664,7 +676,7 @@ pub struct Repository {
     pub id: RepositoryId,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub node_id: Option<String>,
-    pub name: String,
+    pub name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub full_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]

@@ -14,9 +14,9 @@ pub struct GollumEventPayload {
 #[non_exhaustive]
 pub struct GollumEventPage {
     /// The name of the page.
-    pub page_name: String,
+    pub page_name: Option<String>,
     /// The title of the page.
-    pub title: String,
+    pub title:  Option<String>,
     /// The action performed on the page.
     pub action: GollumEventPageAction,
     /// The latest commit SHA of the page.

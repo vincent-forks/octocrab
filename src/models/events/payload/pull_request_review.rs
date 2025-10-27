@@ -19,6 +19,9 @@ pub struct PullRequestReviewEventPayload {
 #[non_exhaustive]
 pub enum PullRequestReviewEventAction {
     Created,
+    Updated,
+    #[serde(other)]
+    Unknown,
 }
 
 /// The change which occurred in an event of type [`PullRequestReviewEventAction::Edited`].

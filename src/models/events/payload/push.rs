@@ -8,13 +8,13 @@ use crate::models::PushId;
 #[non_exhaustive]
 pub struct PushEventPayload {
     pub push_id: PushId,
-    pub size: u64,
-    pub distinct_size: u64,
+    pub size: Option<u64>,
+    pub distinct_size: Option<u64>,
     pub r#ref: String,
     pub head: String,
     pub before: String,
     #[serde(skip_serializing)]
-    pub commits: Vec<Commit>,
+    pub commits: Option<Vec<Commit>>,
 }
 
 #[cfg(test)]
