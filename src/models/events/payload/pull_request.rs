@@ -22,6 +22,8 @@ pub struct PullRequestEventPayload {
 pub enum PullRequestEventAction {
     Opened,
     Closed,
+    /// Only available on some event streams.
+    Merged,
     Reopened,
     /// Only available on webhook events.
     Edited,
@@ -71,6 +73,7 @@ mod test {
         let actions = vec![
             (r#""opened""#, PullRequestEventAction::Opened),
             (r#""closed""#, PullRequestEventAction::Closed),
+            (r#""merged""#, PullRequestEventAction::Merged),
             (r#""reopened""#, PullRequestEventAction::Reopened),
             (r#""edited""#, PullRequestEventAction::Edited),
             (r#""assigned""#, PullRequestEventAction::Assigned),
