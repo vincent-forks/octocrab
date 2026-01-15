@@ -109,10 +109,20 @@ event_type! {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct Repository {
+    #[serde(default = "default_repository_id")]
     pub id: RepositoryId,
+    #[serde(default)]
     pub name: String,
-    #[serde(skip_serializing)]
+    #[serde(default = "default_repository_url", skip_serializing)]
     pub url: Url,
+}
+
+fn default_repository_id() -> RepositoryId {
+    RepositoryId(0)
+}
+
+fn default_repository_url() -> Url {
+    Url::parse("https://api.github.com/").expect("default repository URL is valid")
 }
 
 /// The organization an [`Event`] belongs to.
